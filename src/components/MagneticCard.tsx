@@ -22,6 +22,7 @@ export default function MagneticCard({ children, className = "" }: MagneticCardP
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!ref.current) return;
+    if (typeof window !== 'undefined' && window.innerWidth < 768) return;
     
     const rect = ref.current.getBoundingClientRect();
     const width = rect.width;

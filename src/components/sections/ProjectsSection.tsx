@@ -121,7 +121,7 @@ export default function ProjectsSection() {
   });
 
   return (
-    <section id="projects" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="projects" className="mx-auto max-w-7xl px-4 py-12 md:py-20 sm:px-6 lg:px-8">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -183,7 +183,7 @@ export default function ProjectsSection() {
                 <MagneticCard className="h-full">
                   <div
                     onClick={() => setSelectedProject(project)}
-                    className="group glass-panel h-full cursor-pointer p-6 flex flex-col justify-between transition-all duration-300 hover:border-white/20 hover:bg-white/5"
+                    className="group glass-panel h-full cursor-pointer p-5 md:p-6 flex flex-col justify-between transition-all duration-300 hover:border-white/20 hover:bg-white/5"
                   >
                     <div>
                       <div className="flex items-center justify-between mb-5">
@@ -258,7 +258,7 @@ export default function ProjectsSection() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 10 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl p-6 md:p-10 overflow-y-auto max-h-[90vh] z-10"
+              className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl p-5 md:p-10 overflow-y-auto max-h-[90vh] z-10"
             >
               <button
                 onClick={() => setSelectedProject(null)}

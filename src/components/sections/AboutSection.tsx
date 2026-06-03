@@ -74,7 +74,7 @@ export default function AboutSection() {
   };
 
   return (
-    <section id="about" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="about" className="mx-auto max-w-6xl px-4 py-12 md:py-20 sm:px-6 lg:px-8">
       {/* Section Header */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -98,7 +98,7 @@ export default function AboutSection() {
         {/* Left Column: Biography Details */}
         <motion.div variants={itemVariants} className="lg:col-span-5 space-y-8" style={{ perspective: 1000 }}>
           <MagneticCard>
-            <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300 h-full">
+            <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300 h-full">
               <h3 className="font-sans text-2xl font-semibold text-white mb-4">Uday Bansal</h3>
               <p className="text-sm md:text-base text-muted font-sans leading-relaxed mb-6">
                 I am a third-year B.Tech Computer Science student specializing in Artificial Intelligence and Machine Learning. 
@@ -115,7 +115,7 @@ export default function AboutSection() {
 
           {/* Key Metrics Cards */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="glass-panel p-5 rounded-xl border-t border-white/5 hover:bg-white/5 transition-all">
+            <div className="glass-panel p-4 md:p-5 rounded-xl border-t border-white/5 hover:bg-white/5 transition-all">
               <span className="font-sans text-[11px] font-medium text-muted tracking-wider uppercase block mb-2">
                 Degree
               </span>
@@ -124,7 +124,7 @@ export default function AboutSection() {
               </span>
             </div>
 
-            <div className="glass-panel p-5 rounded-xl border-t border-white/5 hover:bg-white/5 transition-all">
+            <div className="glass-panel p-4 md:p-5 rounded-xl border-t border-white/5 hover:bg-white/5 transition-all">
               <span className="font-sans text-[11px] font-medium text-muted tracking-wider uppercase block mb-2">
                 Age
               </span>
@@ -133,7 +133,7 @@ export default function AboutSection() {
               </span>
             </div>
 
-            <div className="glass-panel p-5 rounded-xl border-t border-emerald-500/20 hover:bg-emerald-500/5 transition-all">
+            <div className="glass-panel p-4 md:p-5 rounded-xl border-t border-emerald-500/20 hover:bg-emerald-500/5 transition-all">
               <span className="font-sans text-[11px] font-medium text-muted tracking-wider uppercase block mb-2">
                 Availability
               </span>
@@ -146,7 +146,7 @@ export default function AboutSection() {
               </span>
             </div>
 
-            <div className="glass-panel p-5 rounded-xl border-t border-white/5 hover:bg-amber-400/5 transition-all">
+            <div className="glass-panel p-4 md:p-5 rounded-xl border-t border-white/5 hover:bg-amber-400/5 transition-all">
               <span className="font-sans text-[11px] font-medium text-muted tracking-wider uppercase block mb-2">
                 Current GPA
               </span>
@@ -177,7 +177,7 @@ export default function AboutSection() {
                 >
                   {/* Timeline Bullet */}
                   <div
-                    className={`absolute -left-[35px] md:-left-[43px] top-1.5 flex h-7 w-7 items-center justify-center rounded-full border bg-black ${colorClasses} transition-transform group-hover:scale-110`}
+                    className={`absolute -left-[38px] md:-left-[46px] top-1.5 flex h-7 w-7 items-center justify-center rounded-full border bg-black ${colorClasses} transition-transform group-hover:scale-110`}
                   >
                     {getTimelineMarker(event.type)}
                   </div>
@@ -188,7 +188,7 @@ export default function AboutSection() {
                   </span>
 
                   {/* Event Details Card */}
-                  <div className="glass-panel p-6 rounded-2xl transition-all duration-300 hover:border-white/20 hover:bg-white/5">
+                  <div className="glass-panel p-5 md:p-6 rounded-2xl transition-all duration-300 hover:border-white/20 hover:bg-white/5">
                     <h4 className="font-sans text-lg font-semibold text-white mb-1">
                       {event.title}
                     </h4>
@@ -244,7 +244,7 @@ export default function AboutSection() {
         className="mt-16 pt-16 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
       >
         {/* What Makes Me Different */}
-        <div className="glass-panel p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+        <div className="glass-panel p-6 md:p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
           <h3 className="font-sans text-lg md:text-xl font-bold text-white mb-6 flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-amber-400" /> What Makes Me Different
           </h3>
@@ -266,7 +266,7 @@ export default function AboutSection() {
         </div>
 
         {/* Current Focus / Learning */}
-        <div className="glass-panel p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
+        <div className="glass-panel p-6 md:p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
           <h3 className="font-sans text-lg md:text-xl font-bold text-white mb-6 flex items-center gap-2">
             <Hourglass className="h-5 w-5 text-emerald-400" /> Current Focus & Learning
           </h3>

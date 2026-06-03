@@ -110,7 +110,7 @@ export default function HeroSection() {
         {/* Stats Pill Bar */}
         <motion.div
           variants={itemVariants}
-          className="flex flex-wrap items-center justify-center gap-4 md:gap-8 w-full max-w-3xl glass-panel p-6 hover:border-white/10 transition-colors"
+          className="flex flex-wrap items-center justify-center gap-3 md:gap-8 w-full max-w-3xl glass-panel p-4 md:p-6 hover:border-white/10 transition-colors"
         >
           {[
             { label: "Core Projects", value: "3+", icon: Database },
@@ -122,13 +122,13 @@ export default function HeroSection() {
             return (
               <div
                 key={i}
-                className="flex items-center gap-4 px-2 md:px-4 border-r border-white/5 last:border-r-0"
+                className="flex items-center gap-2 md:gap-4 px-2 md:px-4 border-r border-white/5 last:border-r-0"
               >
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/5 text-muted">
-                  <Icon className="h-5 w-5" />
+                <div className="flex h-8 w-8 md:h-10 md:w-10 items-center justify-center rounded-full bg-white/5 text-muted">
+                  <Icon className="h-4 w-4 md:h-5 md:w-5" />
                 </div>
                 <div className="flex flex-col items-start">
-                  <span className="font-sans text-base md:text-lg font-bold text-white leading-none mb-1">
+                  <span className="font-sans text-sm md:text-lg font-bold text-white leading-none mb-1">
                     {stat.value}
                   </span>
                   <span className="font-sans text-[10px] md:text-xs font-medium text-muted">

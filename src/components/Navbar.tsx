@@ -2,7 +2,8 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
-import { Menu, X, ArrowUpRight } from "lucide-react";
+import Link from "next/link";
+import { Menu, X, ArrowRight } from "lucide-react";
 
 const NAV_ITEMS = [
   { name: "Home", path: "#home" },
@@ -109,15 +110,13 @@ export default function Navbar() {
             <span className="text-xs font-medium text-muted">Available</span>
           </div>
 
-          <a
+          <Link
             href="/resume"
-            target="_blank"
-            rel="noopener noreferrer"
             className="flex items-center gap-1.5 rounded-full bg-white text-black px-4 py-2 text-sm font-semibold transition-all hover:scale-105 hover:bg-gray-100"
           >
             Resume
-            <ArrowUpRight className="h-4 w-4" />
-          </a>
+            <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
 
         {/* Mobile Menu Button */}
@@ -161,16 +160,14 @@ export default function Navbar() {
           </div>
 
           <div className="mt-4 pt-4 border-t border-white/10">
-            <a
+            <Link
               href="/resume"
-              target="_blank"
-              rel="noopener noreferrer"
               onClick={() => setIsOpen(false)}
               className="flex items-center justify-center gap-2 w-full rounded-xl bg-white text-black py-3 text-sm font-semibold transition-all hover:bg-gray-200"
             >
               View Resume
-              <ArrowUpRight className="h-4 w-4" />
-            </a>
+              <ArrowRight className="h-4 w-4" />
+            </Link>
           </div>
         </motion.div>
       )}

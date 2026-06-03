@@ -60,7 +60,7 @@ export default function ContactSection() {
   ];
 
   return (
-    <section id="contact" className="mx-auto max-w-6xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="contact" className="mx-auto max-w-6xl px-4 py-12 md:py-20 sm:px-6 lg:px-8">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
@@ -84,7 +84,7 @@ export default function ContactSection() {
           className="lg:col-span-5 space-y-8"
         >
           {/* Availability Card */}
-          <div className="glass-panel p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all shadow-lg hover:shadow-white/5">
+          <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all shadow-lg hover:shadow-white/5">
             <div className="flex items-center gap-3 mb-5">
               <span className="relative flex h-3 w-3">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -141,7 +141,7 @@ export default function ContactSection() {
           transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
           className="lg:col-span-7"
         >
-          <div className="glass-panel p-8 md:p-10 rounded-2xl relative min-h-[500px] flex flex-col justify-center shadow-lg hover:border-white/20 transition-colors duration-300">
+          <div className="glass-panel p-6 md:p-10 rounded-2xl relative min-h-[500px] flex flex-col justify-center shadow-lg hover:border-white/20 transition-colors duration-300">
             <AnimatePresence mode="wait">
               {!isSubmitted ? (
                 <motion.form
