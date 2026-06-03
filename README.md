@@ -1,36 +1,111 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Uday Bansal — AI/ML Engineer & GenAI Developer
 
-## Getting Started
+An ultra-premium, interactive developer portfolio highlighting academic and project experience in Machine Learning Engineering, Generative AI applications (RAG, LLM chains), and production-ready scalable Backend integrations. Built with Next.js 16, React 19, Tailwind CSS v4, and Framer Motion.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🌟 Visual & Interactive Features
+
+- **Sleek Glassmorphic Layout**: Dark theme visual identity with tailored ambient radial flows, micro-grid dividers, and high-performance interactive components.
+- **3D Magnetic Cards**: Dynamic components responding to cursor coordinates with smooth, spring-based motion.
+- **Asynchronous Typewriter**: Custom hook-based loop typing subtitles beneath the header to avoid layout blocks.
+- **Technical Arsenal Selector**: Organized category-swapping skill grid displaying ML, DL, GenAI, Backend, Languages, and Tools with unique branding color states.
+- **Interactive Project Overlays**: Micro-animated detail modals for showcasing system designs, pipelines, features, and performance results.
+- **Integrated Contact Form**: Custom validation and transition states simulating contact submissions.
+
+---
+
+## 🛠️ Technology Stack
+
+- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
+- **Core Logic**: [React 19](https://react.dev/) & [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/) & PostCSS
+- **Animations**: [Framer Motion 12](https://www.framer.com/motion/)
+- **Icons**: [Lucide React](https://lucide.dev/) & [React Icons](https://react-icons.github.io/react-icons/)
+
+---
+
+## 📁 Directory Structure
+
+```text
+portfolio/
+├── public/                 # Static assets (PDFs, Images, Icons)
+│   └── resume/             # Contains Uday_Bansal_Resume.pdf
+├── src/
+│   ├── app/                # Next.js App Router root layout & global pages
+│   │   ├── globals.css     # Tailwind custom CSS theme configuration
+│   │   ├── layout.tsx      # Base layout, fonts (Inter, Space Mono), & SEO metadata
+│   │   └── page.tsx        # Portfolio landing page assembling all sections
+│   └── components/         # Reusable UI elements & modules
+│       ├── sections/       # Distinct sections of the single-page layout
+│       │   ├── AboutSection.tsx      # Education (coursework), self-driven projects, and focus lists
+│       │   ├── ContactSection.tsx    # Live messaging form, phone, email, & social links
+│       │   ├── HeroSection.tsx       # Profile intro, headline, stats pill, & core CTA buttons
+│       │   ├── ProjectsSection.tsx   # NeuralDoc, RAG Chatbot, & Predictive Analytics
+│       │   └── SkillsSection.tsx     # Tabbed Technical Arsenal system
+│       ├── GlobalEffects.tsx         # Fixed layout indicators (e.g. scroll progress bar)
+│       ├── Icons.tsx                 # Inline vector components (GitHub, LinkedIn)
+│       ├── MagneticCard.tsx          # 3D interactive layout wrapper
+│       ├── Navbar.tsx                # Responsive navigation bar & sticky header scroll-spy
+│       ├── PageWrapper.tsx           # Page transition logic wrapper
+│       └── Typewriter.tsx            # Animated loop-based typewriter effect
+├── package.json            # Scripts and dependencies metadata
+├── tsconfig.json           # Type safety compiler configuration
+└── eslint.config.mjs       # Project linting guidelines
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🚀 Getting Started
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 📋 Prerequisites
 
-## Learn More
+- **Node.js**: `v18.x` or later (Recommended: `v20.x+`)
+- **npm** or **yarn** / **pnpm** / **bun**
 
-To learn more about Next.js, take a look at the following resources:
+### 💻 Installation & Local Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/UdayBansalG0423/portfolio.git
+   cd portfolio
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
 
-## Deploy on Vercel
+3. **Run the development server:**
+   ```bash
+   npm run dev
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. **View in the browser:**
+   Open your browser and navigate to `http://localhost:3000`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🏗️ Production Build
+
+To compile the application to optimized static HTML/CSS files ready for production deployment:
+
+1. **Generate production build:**
+   ```bash
+   npm run build
+   ```
+
+2. **Preview local production build:**
+   ```bash
+   npm run start
+   ```
+
+---
+
+## 📄 Contact Details
+
+Developed by **Uday Bansal**.
+- **Email**: [bansaluday.112@gmail.com](mailto:bansaluday.112@gmail.com)
+- **Phone**: [+91 95289 68570](tel:9528968570)
+- **LinkedIn**: [linkedin.com/in/uday-bansal-13213a289](https://www.linkedin.com/in/uday-bansal-13213a289/)
+- **GitHub**: [github.com/UdayBansalG0423](https://github.com/UdayBansalG0423)
