@@ -28,7 +28,7 @@ const TIMELINE_DATA: TimelineItem[] = [
     title: "Bachelor of Technology (B.Tech)",
     subtitle: "Computer Science Engineering (Artificial Intelligence & Machine Learning)",
     description:
-      "Third Year. Maintaining a strong academic track record with a focus on advanced mathematical modeling, deep learning architectures, and software engineering principles. GPA: 7.4 / 10. Relevant Coursework: Data Structures & Algorithms, Machine Learning, Deep Learning, Database Management Systems, Operating Systems, Computer Networks, Object-Oriented Programming, Artificial Intelligence.",
+      "Fourth Year. Maintaining a strong academic track record with a focus on advanced mathematical modeling, deep learning architectures, and software engineering principles. GPA: 7.4 / 10. Relevant Coursework: Data Structures & Algorithms, Machine Learning, Deep Learning, Database Management Systems, Operating Systems, Computer Networks, Object-Oriented Programming, Artificial Intelligence.",
     type: "academic",
     color: "emerald",
   },
@@ -101,7 +101,7 @@ export default function AboutSection() {
             <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300 h-full">
               <h3 className="font-sans text-2xl font-semibold text-white mb-4">Uday Bansal</h3>
               <p className="text-sm md:text-base text-muted font-sans leading-relaxed mb-6">
-                I am a third-year B.Tech Computer Science student specializing in Artificial Intelligence and Machine Learning. 
+                I am a fourth-year B.Tech Computer Science student specializing in Artificial Intelligence and Machine Learning. 
                 My primary interests lie in Machine Learning, Deep Learning, Generative AI, Retrieval-Augmented Generation (RAG), and Backend Development. 
                 I enjoy transforming complex AI concepts into practical applications that can be used in real-world environments.
               </p>

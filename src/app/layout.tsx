@@ -19,7 +19,7 @@ const spaceMono = Space_Mono({
 export const metadata: Metadata = {
   title: "Uday Bansal | AI/ML Engineer & GenAI Developer",
   description:
-    "Portfolio of Uday Bansal, a 3rd-year B.Tech CSE (AI/ML) student, AI/ML Engineer, Generative AI Developer, and Backend Learner building production-ready intelligent systems.",
+    "Portfolio of Uday Bansal, a 4th-year B.Tech CSE (AI/ML) student, AI/ML Engineer, Generative AI Developer, and Backend Learner building production-ready intelligent systems.",
   keywords: [
     "Uday Bansal",
     "AI/ML Engineer",

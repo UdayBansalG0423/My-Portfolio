@@ -115,7 +115,7 @@ export default function HeroSection() {
           {[
             { label: "Core Projects", value: "3+", icon: Database },
             { label: "Current Focus", value: "GenAI & RAG", icon: Award },
-            { label: "B.Tech Year", value: "3rd Year", icon: GraduationCap },
+            { label: "B.Tech Year", value: "4th Year", icon: GraduationCap },
             { label: "Academic GPA", value: "7.4/10", icon: Briefcase },
           ].map((stat, i) => {
             const Icon = stat.icon;

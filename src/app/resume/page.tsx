@@ -74,7 +74,7 @@ export default function ResumePage() {
               AI/ML Engineer & Generative AI Developer
             </p>
             <p className="font-sans text-xs text-muted mt-1 uppercase tracking-wider">
-              3rd Year B.Tech CSE (AI/ML Major) · GPA 7.4 / 10
+              4th Year B.Tech CSE (AI/ML Major) · GPA 7.4 / 10
             </p>
           </div>
 
@@ -123,7 +123,7 @@ export default function ResumePage() {
               <span className="font-mono text-[10px] text-muted font-semibold block mb-1">2024 - 2027</span>
               <h3 className="font-sans text-base font-bold text-white leading-snug">Bachelor of Technology (B.Tech)</h3>
               <p className="font-sans text-xs text-emerald-400 font-semibold mt-1">Computer Science & Engineering (AI/ML)</p>
-              <p className="font-sans text-xs text-muted mt-2">Apex Institute of Technology · GPA 7.4 / 10</p>
+              <p className="font-sans text-xs text-muted mt-2">GLA University · GPA 7.4 / 10</p>
               
               <div className="mt-4 pt-4 border-t border-white/5">
                 <span className="font-sans text-xs font-bold text-white uppercase tracking-wide block mb-2">Relevant Coursework</span>
