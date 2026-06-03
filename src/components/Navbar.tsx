@@ -56,12 +56,12 @@ export default function Navbar() {
   };
 
   return (
-    <header className="fixed top-0 z-50 w-full flex justify-center pt-6 px-4">
+    <header className="fixed top-0 z-50 w-full flex justify-center pt-4 px-4">
       <div
-        className={`mx-auto max-w-5xl w-full flex items-center justify-between rounded-full transition-all duration-300 ${
+        className={`mx-auto max-w-5xl w-full flex items-center justify-between rounded-full transition-all duration-500 ${
           scrolled
-            ? "bg-black/60 backdrop-blur-xl border border-white/10 py-3 px-6 shadow-2xl shadow-black/50"
-            : "bg-transparent py-4 px-4"
+            ? "bg-black/75 backdrop-blur-2xl border border-white/15 py-3 px-6 shadow-2xl shadow-black/60"
+            : "bg-black/30 backdrop-blur-md border border-white/8 py-3 px-6 shadow-lg shadow-black/20"
         }`}
       >
         {/* Logo / Name */}

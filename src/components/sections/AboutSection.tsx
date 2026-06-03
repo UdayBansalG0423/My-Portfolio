@@ -80,7 +80,7 @@ export default function AboutSection() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="mb-16"
+        className="mb-16 text-center flex flex-col items-center"
       >
         <h2 className="font-sans text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
           About Me

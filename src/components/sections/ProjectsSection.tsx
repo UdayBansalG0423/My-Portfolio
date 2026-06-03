@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from "framer-motion";
 import {
   FileText,
   MessageSquare,
@@ -30,6 +30,7 @@ interface Project {
   details: string[];
   github: string;
   demo: string;
+  image: string;
 }
 
 const PROJECTS_DATA: Project[] = [
@@ -57,6 +58,7 @@ const PROJECTS_DATA: Project[] = [
     ],
     github: "https://github.com/UdayBansalG0423",
     demo: "https://github.com/UdayBansalG0423",
+    image: "/projects/neuraldoc.png",
   },
   {
     id: 2,
@@ -81,6 +83,7 @@ const PROJECTS_DATA: Project[] = [
     ],
     github: "https://github.com/UdayBansalG0423",
     demo: "https://github.com/UdayBansalG0423",
+    image: "/projects/chatbot.png",
   },
   {
     id: 3,
@@ -105,10 +108,134 @@ const PROJECTS_DATA: Project[] = [
     ],
     github: "https://github.com/UdayBansalG0423",
     demo: "https://github.com/UdayBansalG0423",
+    image: "/projects/analytics.png",
   },
 ];
 
 type CategoryFilter = "all" | "featured" | "ai-ml" | "web";
+
+function ProjectCardItem({ project, onClick }: { project: Project, onClick: () => void }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const IconComponent = project.icon;
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  // Determine glow color based on the project's accent color
+  const glowColor = 
+    project.colorClass.includes("blue") ? "rgba(59, 130, 246, 0.15)" :
+    project.colorClass.includes("emerald") ? "rgba(16, 185, 129, 0.15)" :
+    project.colorClass.includes("purple") ? "rgba(168, 85, 247, 0.15)" : "rgba(255, 255, 255, 0.1)";
+
+  return (
+    <div
+      onClick={onClick}
+      onMouseMove={handleMouseMove}
+      className="group relative h-full w-full cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-[#0a0a0a]/50 p-6 transition-all duration-500 hover:border-white/20"
+    >
+      {/* Soft general white glow */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              600px circle at ${mouseX}px ${mouseY}px,
+              rgba(255,255,255,0.03),
+              transparent 40%
+            )
+          `,
+        }}
+      />
+      {/* Accent color specific glow */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              400px circle at ${mouseX}px ${mouseY}px,
+              ${glowColor},
+              transparent 40%
+            )
+          `,
+        }}
+      />
+
+      <div className="absolute inset-x-0 top-0 h-48 overflow-hidden rounded-t-2xl border-b border-white/10 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10" />
+        {project.image && (
+          <img 
+            src={project.image} 
+            alt={project.title} 
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+        )}
+      </div>
+
+      <div className="relative z-20 flex h-full flex-col justify-between pt-32" style={{ transform: "translateZ(40px)" }}>
+        {/* Top Header */}
+        <div>
+          <div className="flex items-center justify-between mb-6">
+            <span className="font-sans text-[10px] font-bold tracking-widest text-muted/80 uppercase">
+              {project.tag}
+            </span>
+            {project.isFeatured && (
+              <span className="flex items-center gap-1.5 font-sans font-bold text-[9px] text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2.5 py-1 rounded-full uppercase tracking-widest shadow-[0_0_10px_rgba(251,191,36,0.1)] transition-all group-hover:shadow-[0_0_15px_rgba(251,191,36,0.3)]">
+                <Star className="h-3 w-3 fill-amber-400" /> Featured
+              </span>
+            )}
+          </div>
+          
+          <div className="flex items-center gap-4 mb-5">
+            <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${project.bgClass} border border-white/5 shadow-inner transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3`}>
+              <IconComponent className={`h-6 w-6 ${project.colorClass}`} />
+            </div>
+            <h3 className="font-sans text-2xl font-bold text-white transition-all duration-300 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-white group-hover:to-gray-400">
+              {project.title}
+            </h3>
+          </div>
+          
+          <p className={`font-sans text-[11px] font-bold ${project.colorClass} mb-4 uppercase tracking-widest`}>
+            {project.highlight}
+          </p>
+          
+          <p className="font-sans text-sm text-muted/70 leading-relaxed line-clamp-3 mb-8 transition-colors duration-300 group-hover:text-muted">
+            {project.description}
+          </p>
+        </div>
+
+        {/* Bottom Tags */}
+        <div className="mt-auto relative">
+          <div className="flex flex-wrap gap-2 transition-transform duration-500 group-hover:-translate-y-1">
+            {project.tech.slice(0, 3).map((t, idx) => (
+              <span
+                key={idx}
+                className="font-sans text-[10px] font-semibold bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg text-muted transition-all duration-300 group-hover:bg-white/10 group-hover:text-white"
+              >
+                {t}
+              </span>
+            ))}
+            {project.tech.length > 3 && (
+              <span className="font-sans text-[10px] font-semibold text-muted px-2 py-1.5">
+                +{project.tech.length - 3} more
+              </span>
+            )}
+          </div>
+          
+          {/* Animated Arrow on Hover */}
+          <div className="absolute right-0 bottom-0 opacity-0 transform translate-x-4 transition-all duration-500 group-hover:opacity-100 group-hover:translate-x-0 flex items-center justify-center">
+             <div className="p-2 bg-white/5 rounded-full border border-white/10 group-hover:bg-white/10 transition-colors">
+               <ExternalLink className="h-4 w-4 text-white" />
+             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<CategoryFilter>("all");
@@ -181,59 +308,7 @@ export default function ProjectsSection() {
                 style={{ perspective: 1000 }}
               >
                 <MagneticCard className="h-full">
-                  <div
-                    onClick={() => setSelectedProject(project)}
-                    className="group glass-panel h-full cursor-pointer p-5 md:p-6 flex flex-col justify-between transition-all duration-300 hover:border-white/20 hover:bg-white/5"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between mb-5">
-                        <span className="font-sans text-[11px] font-semibold tracking-wider text-muted uppercase">
-                          {project.tag}
-                        </span>
-
-                        {project.isFeatured && (
-                          <span className="flex items-center gap-1 font-sans font-semibold text-[10px] text-amber-400 bg-amber-500/10 border border-amber-500/20 px-2 py-0.5 rounded-full uppercase tracking-wider">
-                            <Star className="h-3 w-3 fill-amber-400" /> Featured
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-3 mb-4">
-                        <div className={`p-2.5 rounded-xl ${project.bgClass} ${project.colorClass} transition-colors group-hover:bg-white/10`}>
-                          <IconComponent className="h-5 w-5" />
-                        </div>
-                        <h3 className="font-sans text-xl font-bold text-white group-hover:text-gray-200 transition-colors">
-                          {project.title}
-                        </h3>
-                      </div>
-
-                      <p className={`font-sans text-xs md:text-sm font-medium ${project.colorClass} mb-3`}>
-                        {project.highlight}
-                      </p>
-
-                      <p className="font-sans text-sm text-muted leading-relaxed line-clamp-3 mb-6">
-                        {project.description}
-                      </p>
-                    </div>
-
-                    <div>
-                      <div className="flex flex-wrap gap-2 mb-2">
-                        {project.tech.slice(0, 3).map((t, idx) => (
-                          <span
-                            key={idx}
-                            className="font-sans text-[10px] font-medium bg-white/5 border border-white/10 px-2.5 py-1 rounded-full text-muted group-hover:bg-white/10 transition-colors"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                        {project.tech.length > 3 && (
-                          <span className="font-sans text-[10px] font-medium text-muted px-1 py-1">
-                            +{project.tech.length - 3} more
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                  <ProjectCardItem project={project} onClick={() => setSelectedProject(project)} />
                 </MagneticCard>
               </motion.div>
             );

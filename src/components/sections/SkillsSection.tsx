@@ -119,7 +119,7 @@ export default function SkillsSection() {
   const activeCategory = SKILL_CATEGORIES.find((cat) => cat.id === activeTab) || SKILL_CATEGORIES[0];
 
   return (
-    <section id="skills" className="mx-auto max-w-5xl px-4 py-20 sm:px-6 lg:px-8">
+    <section id="skills" className="mx-auto max-w-5xl px-4 pt-8 pb-20 sm:px-6 lg:px-8">
       {/* Header */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
