@@ -51,13 +51,13 @@ export default function HeroSection() {
   };
 
   return (
-    <section id="home" className="relative min-h-[80vh] flex flex-col justify-center items-center px-4 pt-16 pb-20">
+    <section id="home" className="relative min-h-[80vh] flex flex-col justify-center items-center px-4 py-8">
       <motion.div
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true }}
-        className="max-w-4xl w-full text-center flex flex-col items-center justify-center z-10 py-12 md:py-20"
+        className="max-w-4xl w-full text-center flex flex-col items-center justify-center z-10 py-6 md:py-10"
       >
         {/* Sleek intro label */}
         <motion.div
