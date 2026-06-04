@@ -4,8 +4,9 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   ArrowLeft, Download, Mail, Phone, Award, 
-  BookOpen, Sparkles, Terminal, Code, Globe, Twitter
+  BookOpen, Sparkles, Terminal, Code, Globe
 } from "lucide-react";
+import { FaTwitter } from "react-icons/fa";
 
 export default function ResumePage() {
   const containerVariants = {
@@ -94,7 +95,7 @@ export default function ResumePage() {
             </a>
             <a href="https://x.com/Uday_0412" target="_blank" rel="noopener noreferrer" className="flex items-center md:justify-end gap-2 hover:text-white transition-colors">
               x.com/Uday_0412
-              <Twitter className="h-4 w-4" />
+              <FaTwitter className="h-4 w-4" />
             </a>
             <a href="https://github.com/UdayBansalG0423" target="_blank" rel="noopener noreferrer" className="flex items-center md:justify-end gap-2 hover:text-white transition-colors">
               github.com/UdayBansalG0423

@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Send, CheckCircle, MessageSquare, Phone, Sparkles, Twitter } from "lucide-react";
+import { Mail, Send, CheckCircle, MessageSquare, Phone, Sparkles } from "lucide-react";
 import { Github, Linkedin } from "@/components/Icons";
+import { FaTwitter } from "react-icons/fa";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -49,7 +50,7 @@ export default function ContactSection() {
       name: "X (Twitter)",
       url: "https://x.com/Uday_0412",
       label: "x.com/Uday_0412",
-      icon: Twitter,
+      icon: FaTwitter,
     },
     {
       name: "Email",
