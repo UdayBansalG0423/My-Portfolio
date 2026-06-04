@@ -43,11 +43,10 @@ export default function AboutSection() {
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 15, filter: "blur(4px)" },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: { type: "spring", stiffness: 100, damping: 20 },
     },
   } as const;

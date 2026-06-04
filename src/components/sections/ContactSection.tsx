@@ -77,8 +77,8 @@ export default function ContactSection() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
         {/* Left Column: Availability & Info */}
         <motion.div 
-          initial={{ opacity: 0, x: -20, filter: "blur(4px)" }}
-          whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, x: -20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ type: "spring", stiffness: 100, damping: 20 }}
           className="lg:col-span-5 space-y-8"
@@ -135,8 +135,8 @@ export default function ContactSection() {
 
         {/* Right Column: Contact Form / Success state */}
         <motion.div 
-          initial={{ opacity: 0, x: 20, filter: "blur(4px)" }}
-          whileInView={{ opacity: 1, x: 0, filter: "blur(0px)" }}
+          initial={{ opacity: 0, x: 20 }}
+          whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ type: "spring", stiffness: 100, damping: 20, delay: 0.1 }}
           className="lg:col-span-7"
@@ -146,9 +146,9 @@ export default function ContactSection() {
               {!isSubmitted ? (
                 <motion.form
                   key="contact-form"
-                  initial={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
-                  animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
                   transition={{ duration: 0.3 }}
                   onSubmit={handleSubmit}
                   className="space-y-6"

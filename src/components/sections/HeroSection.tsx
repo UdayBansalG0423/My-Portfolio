@@ -42,11 +42,10 @@ export default function HeroSection() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 15, filter: "blur(4px)" },
+    hidden: { opacity: 0, y: 15 },
     visible: {
       opacity: 1,
       y: 0,
-      filter: "blur(0px)",
       transition: { type: "spring" as const, stiffness: 100, damping: 20 },
     },
   };

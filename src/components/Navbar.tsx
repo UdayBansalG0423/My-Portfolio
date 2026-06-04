@@ -19,30 +19,35 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    let rafId: number;
 
-      // Simple scrollspy logic
-      const sections = NAV_ITEMS.map(item => item.path.replace('#', ''));
-      let currentActive = "#home";
-      
-      for (const section of sections) {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          // If the section is near the top of the viewport
-          if (rect.top <= 200 && rect.bottom >= 200) {
-            currentActive = `#${section}`;
+    const handleScroll = () => {
+      // Throttle via rAF — only runs once per animation frame, not every scroll pixel
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+
+        const sections = NAV_ITEMS.map(item => item.path.replace('#', ''));
+        let currentActive = "#home";
+        for (const section of sections) {
+          const element = document.getElementById(section);
+          if (element) {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= 200 && rect.bottom >= 200) {
+              currentActive = `#${section}`;
+            }
           }
         }
-      }
-      setActiveSection(currentActive);
+        setActiveSection(currentActive);
+      });
     };
 
-    window.addEventListener("scroll", handleScroll);
-    // Trigger once on mount
+    window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
