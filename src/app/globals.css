@@ -140,3 +140,98 @@ body {
 .hover-glow-white .card-glow-overlay {
   background: radial-gradient(600px circle at 50% 30%, rgba(255, 255, 255, 0.04), transparent 40%);
 }
+
+/* =========================================
+   AI EASTER EGGS (Zero-JS Performance Optimized)
+   ========================================= */
+
+/* 1. YOLO "Object Detection" Vision */
+.yolo-mode * {
+  outline: 1px solid rgba(16, 185, 129, 0.4) !important;
+  position: relative;
+}
+
+.yolo-mode img::after,
+.yolo-mode button::after,
+.yolo-mode a::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(16, 185, 129, 0.9);
+  color: black;
+  font-family: monospace;
+  font-size: 10px;
+  padding: 2px 4px;
+  z-index: 9999;
+  pointer-events: none;
+}
+
+.yolo-mode img::after { content: 'image 0.99'; }
+.yolo-mode button::after { content: 'action 0.85'; }
+.yolo-mode a::after { content: 'link 0.92'; }
+
+/* 2. LLM "Temperature" Hallucination */
+.hallucinate-mode p, 
+.hallucinate-mode h1, 
+.hallucinate-mode h2, 
+.hallucinate-mode h3, 
+.hallucinate-mode span {
+  animation: llm-glitch 0.2s linear infinite !important;
+  text-shadow: 2px 0 red, -2px 0 blue;
+}
+
+.hallucinate-mode img, 
+.hallucinate-mode .glass-panel {
+  animation: llm-shake 0.1s infinite !important;
+  filter: hue-rotate(90deg) contrast(150%);
+}
+
+@keyframes llm-glitch {
+  0% { transform: translate(0) }
+  20% { transform: translate(-2px, 1px) }
+  40% { transform: translate(-1px, -1px) }
+  60% { transform: translate(2px, 1px) }
+  80% { transform: translate(1px, -1px) }
+  100% { transform: translate(0) }
+}
+
+@keyframes llm-shake {
+  0% { transform: rotate(0deg) }
+  25% { transform: rotate(0.5deg) }
+  50% { transform: rotate(0deg) }
+  75% { transform: rotate(-0.5deg) }
+  100% { transform: rotate(0deg) }
+}
+
+/* 3. Latent Space Vector Embeddings on Hover */
+.vector-hover-effect {
+  position: relative;
+  overflow: hidden;
+}
+.vector-hover-effect::before {
+  content: '[-0.012, 0.441, 0.991, -0.223, 0.512, 0.111, -0.981, 0.432, -0.112, 0.887, 0.543, -0.651, 0.198, 0.334, -0.771, 0.841, -0.001]';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: monospace;
+  font-size: 14px;
+  color: rgba(16, 185, 129, 0.6);
+  background: rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  pointer-events: none;
+  z-index: 50;
+  word-break: break-all;
+  padding: 20px;
+}
+.vector-hover-effect:hover::before {
+  opacity: 1;
+  transform: translateY(0);
+}

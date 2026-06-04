@@ -132,7 +132,7 @@ function ProjectCardItem({ project, onClick }: { project: Project, onClick: () =
       {/* CSS-only hover glow overlay — no JS event handlers */}
       <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
-      <div className="absolute inset-x-0 top-0 h-48 overflow-hidden rounded-t-2xl border-b border-white/10 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
+      <div className={`absolute inset-x-0 top-0 h-48 overflow-hidden rounded-t-2xl border-b border-white/10 opacity-80 group-hover:opacity-100 transition-opacity duration-500 ${(project.category === "ai-ml" || project.tag.includes("RAG")) ? "vector-hover-effect" : ""}`}>
         <MagneticCard className="w-full h-full">
           <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10 pointer-events-none" />
           {project.image && (

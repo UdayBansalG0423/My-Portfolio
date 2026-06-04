@@ -19,12 +19,12 @@ export default function InteractiveTerminal() {
     { type: "system", text: "Type 'help' to see available commands." },
   ]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [yoloMode, setYoloMode] = useState(false);
+  const [temp, setTemp] = useState(0.7);
+
   const bottomRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
-
-  // Hide on resume page to keep it clean
-  if (pathname === "/resume") return null;
 
   // Auto-scroll to bottom
   useEffect(() => {
@@ -39,6 +39,17 @@ export default function InteractiveTerminal() {
       inputRef.current.focus();
     }
   }, [isOpen, isMinimized]);
+
+  // Handle global CSS modes based on Easter Eggs
+  useEffect(() => {
+    if (typeof document !== 'undefined') {
+      if (yoloMode) document.body.classList.add('yolo-mode');
+      else document.body.classList.remove('yolo-mode');
+
+      if (temp >= 1.5) document.body.classList.add('hallucinate-mode');
+      else document.body.classList.remove('hallucinate-mode');
+    }
+  }, [yoloMode, temp]);
 
   const addToHistory = (item: HistoryItem) => {
     setHistory((prev) => [...prev, item]);
@@ -64,6 +75,7 @@ export default function InteractiveTerminal() {
               <span>  whoami        - Display basic info</span>
               <span>  train_model   - Initialize neural network training</span>
               <span>  run_rag       - Execute RAG pipeline</span>
+              <span>  enable_yolo   - Toggle Computer Vision bounding boxes</span>
               <span>  clear         - Clear terminal</span>
             </div>
           ),
@@ -143,6 +155,16 @@ export default function InteractiveTerminal() {
         addToHistory({ type: "error", text: "Nice try. You don't have root privileges here." });
         break;
 
+      case "enable_yolo":
+        setYoloMode(prev => !prev);
+        addToHistory({ 
+          type: "system", 
+          text: !yoloMode 
+            ? "YOLOv8 Object Detection Initialized. Generating bounding boxes..." 
+            : "Computer Vision disabled." 
+        });
+        break;
+
       default:
         addToHistory({ type: "error", text: `Command not found: ${trimmedCmd}` });
     }
@@ -155,6 +177,9 @@ export default function InteractiveTerminal() {
       handleCommand(input);
     }
   };
+
+  // Hide on resume page to keep it clean
+  if (pathname === "/resume") return null;
 
   return (
     <>
@@ -192,11 +217,26 @@ export default function InteractiveTerminal() {
           >
             {/* Title Bar */}
             <div className="flex items-center justify-between px-4 py-2 bg-white/5 border-b border-white/10 select-none">
-              <div className="flex items-center gap-2">
-                <TerminalIcon className="h-4 w-4 text-emerald-400" />
-                <span className="text-xs text-muted font-sans font-medium">
-                  uday@portfolio:~
-                </span>
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2">
+                  <TerminalIcon className="h-4 w-4 text-emerald-400" />
+                  <span className="text-xs text-muted font-sans font-medium hidden sm:inline-block">
+                    uday@portfolio:~
+                  </span>
+                </div>
+                {/* Temperature Slider Easter Egg */}
+                {!isMinimized && (
+                  <div className="flex items-center gap-2" title="LLM Temperature (Hallucination Control)">
+                    <span className="text-[10px] text-muted font-mono uppercase">Temp: {temp.toFixed(1)}</span>
+                    <input 
+                      type="range" 
+                      min="0" max="2" step="0.1" 
+                      value={temp} 
+                      onChange={(e) => setTemp(parseFloat(e.target.value))}
+                      className="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer accent-emerald-500"
+                    />
+                  </div>
+                )}
               </div>
               <div className="flex items-center gap-3">
                 <button
