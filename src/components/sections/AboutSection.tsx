@@ -168,10 +168,10 @@ export default function AboutSection() {
 
           <div ref={containerRef} className="relative pl-6 md:pl-8 space-y-10">
             {/* Static Background Line */}
-            <div className="absolute left-0 top-2 bottom-0 w-[1px] bg-white/10" />
+            <div className="absolute left-0 top-2 bottom-0 w-[1px] bg-white/10 z-0" />
             {/* Animated Glowing Line */}
             <motion.div 
-              className="absolute left-0 top-2 bottom-0 w-[2px] bg-gradient-to-b from-emerald-400 to-emerald-600 origin-top shadow-[0_0_12px_rgba(16,185,129,0.8)]"
+              className="absolute left-0 top-2 bottom-0 w-[2px] bg-gradient-to-b from-emerald-400 to-emerald-600 origin-top shadow-[0_0_12px_rgba(16,185,129,0.8)] z-0"
               style={{ scaleY: scrollYProgress }}
             />
             {TIMELINE_DATA.map((event, index) => {
@@ -187,7 +187,7 @@ export default function AboutSection() {
                 >
                   {/* Timeline Bullet */}
                   <div
-                    className={`absolute -left-[38px] md:-left-[46px] top-1.5 flex h-7 w-7 items-center justify-center rounded-full border bg-black ${colorClasses} transition-transform group-hover:scale-110`}
+                    className={`absolute -left-[38px] md:-left-[46px] top-1.5 flex h-7 w-7 items-center justify-center rounded-full border bg-black ${colorClasses} transition-transform group-hover:scale-110 z-10`}
                   >
                     {getTimelineMarker(event.type)}
                   </div>
