@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { motion, Variants, useMotionValue, useSpring } from "framer-motion";
 import Typewriter from "@/components/Typewriter";
+import MagneticButton from "@/components/MagneticButton";
 import { ArrowRight, Database, Award, Briefcase, GraduationCap } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect } from "react";
@@ -150,20 +151,24 @@ export default function HeroSection() {
           variants={itemVariants}
           className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full sm:w-auto mb-20"
         >
-          <Link
-            href="#projects"
-            className="group w-full sm:w-auto px-8 h-12 bg-white text-black font-semibold text-sm rounded-full flex items-center justify-center gap-2 transition-all hover:scale-105 hover:bg-gray-100 shadow-lg shadow-white/10"
-          >
-            Explore Projects
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+          <MagneticButton>
+            <Link
+              href="#projects"
+              className="group w-full sm:w-auto px-8 h-12 bg-white text-black font-semibold text-sm rounded-full flex items-center justify-center gap-2 transition-all hover:scale-105 hover:bg-gray-100 shadow-lg shadow-white/10"
+            >
+              Explore Projects
+              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </MagneticButton>
 
-          <Link
-            href="#contact"
-            className="w-full sm:w-auto px-8 h-12 border border-white/10 bg-white/5 text-white hover:bg-white/10 font-medium text-sm rounded-full flex items-center justify-center gap-2 transition-all hover:border-white/20"
-          >
-            Get In Touch
-          </Link>
+          <MagneticButton>
+            <Link
+              href="#contact"
+              className="w-full sm:w-auto px-8 h-12 border border-white/10 bg-white/5 text-white hover:bg-white/10 font-medium text-sm rounded-full flex items-center justify-center gap-2 transition-all hover:border-white/20"
+            >
+              Get In Touch
+            </Link>
+          </MagneticButton>
         </motion.div>
 
         {/* Stats Pill Bar */}

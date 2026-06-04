@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Send, CheckCircle, MessageSquare, Phone } from "lucide-react";
+import { Mail, Send, CheckCircle, MessageSquare, Phone, Sparkles } from "lucide-react";
 import { Github, Linkedin } from "@/components/Icons";
 
 export default function ContactSection() {
@@ -225,12 +225,16 @@ export default function ContactSection() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full h-12 bg-white hover:bg-gray-200 disabled:bg-gray-400 text-black font-sans font-semibold text-sm flex items-center justify-center gap-2 rounded-xl transition-all shadow-lg hover:shadow-xl cursor-pointer"
+                    className={`w-full h-12 flex items-center justify-center gap-2 rounded-xl transition-all shadow-lg font-sans font-semibold text-sm ${
+                      isSubmitting
+                        ? "bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 cursor-not-allowed"
+                        : "bg-white hover:bg-gray-200 text-black hover:shadow-xl cursor-pointer"
+                    }`}
                   >
                     {isSubmitting ? (
                       <>
-                        <span className="h-4 w-4 border-2 border-black/20 border-t-black rounded-full animate-spin" />
-                        Sending...
+                        <Sparkles className="h-4 w-4 animate-pulse" />
+                        Processing...
                       </>
                     ) : (
                       <>

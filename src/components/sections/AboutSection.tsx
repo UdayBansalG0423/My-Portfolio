@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll } from "framer-motion";
 import { Briefcase, GraduationCap, Sparkles, User, Hourglass } from "lucide-react";
 
 interface TimelineItem {
@@ -34,6 +35,12 @@ const TIMELINE_DATA: TimelineItem[] = [
 ];
 
 export default function AboutSection() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -159,7 +166,14 @@ export default function AboutSection() {
             Experience & Education
           </h3>
 
-          <div className="relative pl-6 md:pl-8 border-l border-white/10 space-y-10">
+          <div ref={containerRef} className="relative pl-6 md:pl-8 space-y-10">
+            {/* Static Background Line */}
+            <div className="absolute left-0 top-2 bottom-0 w-[1px] bg-white/10" />
+            {/* Animated Glowing Line */}
+            <motion.div 
+              className="absolute left-0 top-2 bottom-0 w-[2px] bg-gradient-to-b from-emerald-400 to-emerald-600 origin-top shadow-[0_0_12px_rgba(16,185,129,0.8)]"
+              style={{ scaleY: scrollYProgress }}
+            />
             {TIMELINE_DATA.map((event, index) => {
               const colorClasses = getColorClasses(event.color);
               return (

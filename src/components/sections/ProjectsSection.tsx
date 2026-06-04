@@ -13,6 +13,7 @@ import {
   LucideIcon,
 } from "lucide-react";
 import { Github } from "@/components/Icons";
+import MagneticCard from "@/components/MagneticCard";
 
 interface Project {
   id: number;
@@ -132,17 +133,19 @@ function ProjectCardItem({ project, onClick }: { project: Project, onClick: () =
       <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="absolute inset-x-0 top-0 h-48 overflow-hidden rounded-t-2xl border-b border-white/10 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10" />
-        {project.image && (
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover transition-transform duration-700 group-hover:scale-110"
-            loading="lazy"
-          />
-        )}
+        <MagneticCard className="w-full h-full">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10 pointer-events-none" />
+          {project.image && (
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+              loading="lazy"
+            />
+          )}
+        </MagneticCard>
       </div>
 
       <div className="relative z-20 flex h-full flex-col justify-between pt-32" style={{ transform: "translateZ(40px)" }}>
