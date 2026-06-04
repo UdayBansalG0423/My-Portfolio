@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Mail, Send, CheckCircle, MessageSquare, Phone, Sparkles } from "lucide-react";
+import { Mail, Send, CheckCircle, MessageSquare, Phone, Sparkles, Twitter } from "lucide-react";
 import { Github, Linkedin } from "@/components/Icons";
 
 export default function ContactSection() {
@@ -44,6 +44,12 @@ export default function ContactSection() {
       url: "https://www.linkedin.com/in/uday-bansal-13213a289/",
       label: "linkedin.com/in/uday-bansal-13213a289",
       icon: Linkedin,
+    },
+    {
+      name: "X (Twitter)",
+      url: "https://x.com/Uday_0412",
+      label: "x.com/Uday_0412",
+      icon: Twitter,
     },
     {
       name: "Email",

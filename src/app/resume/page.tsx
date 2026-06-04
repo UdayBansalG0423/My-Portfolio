@@ -4,7 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { 
   ArrowLeft, Download, Mail, Phone, Award, 
-  BookOpen, Sparkles, Terminal, Code, Globe
+  BookOpen, Sparkles, Terminal, Code, Globe, Twitter
 } from "lucide-react";
 
 export default function ResumePage() {
@@ -88,9 +88,13 @@ export default function ResumePage() {
               +91 95289 68570
               <Phone className="h-4 w-4" />
             </a>
-            <a href="https://linkedin.com/in/uday-bansal-13213a289" target="_blank" rel="noopener noreferrer" className="flex items-center md:justify-end gap-2 hover:text-white transition-colors">
+            <a href="https://www.linkedin.com/in/uday-bansal-13213a289/" target="_blank" rel="noopener noreferrer" className="flex items-center md:justify-end gap-2 hover:text-white transition-colors">
               linkedin.com/in/uday-bansal-13213a289
               <Globe className="h-4 w-4" />
+            </a>
+            <a href="https://x.com/Uday_0412" target="_blank" rel="noopener noreferrer" className="flex items-center md:justify-end gap-2 hover:text-white transition-colors">
+              x.com/Uday_0412
+              <Twitter className="h-4 w-4" />
             </a>
             <a href="https://github.com/UdayBansalG0423" target="_blank" rel="noopener noreferrer" className="flex items-center md:justify-end gap-2 hover:text-white transition-colors">
               github.com/UdayBansalG0423

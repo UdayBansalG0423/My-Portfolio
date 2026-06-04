@@ -1,14 +1,15 @@
 "use client";
 
-import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaEnvelope, FaTwitter } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SOCIAL_LINKS = [
   { name: "GitHub", href: "https://github.com/UdayBansalG0423", icon: FaGithub },
-  { name: "LinkedIn", href: "https://linkedin.com/in/uday-bansal", icon: FaLinkedin },
-  { name: "Twitter", href: "https://twitter.com/", icon: FaTwitter },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/uday-bansal-13213a289/", icon: FaLinkedin },
+  { name: "Twitter", href: "https://x.com/Uday_0412", icon: FaTwitter },
+  { name: "Email", href: "mailto:bansaluday.112@gmail.com", icon: FaEnvelope },
 ];
 
 const WORDS = ["amazing", "creative", "impactful", "intelligent"];
