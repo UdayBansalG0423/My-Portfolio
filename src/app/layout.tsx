@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import GlobalEffects from "@/components/GlobalEffects";
 import PageWrapper from "@/components/PageWrapper";
 
@@ -61,17 +62,7 @@ export default function RootLayout({
           <PageWrapper>{children}</PageWrapper>
         </main>
 
-        {/* Minimal Footer */}
-        <footer className="w-full border-t border-white/5 bg-black/40 backdrop-blur-md py-8 text-center mt-20 relative z-10">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-2">
-            <span className="font-sans text-sm text-muted">
-              Built with precision.
-            </span>
-            <span className="font-mono text-xs text-muted/60">
-              © {new Date().getFullYear()} UDAY BANSAL. ALL RIGHTS RESERVED.
-            </span>
-          </div>
-        </footer>
+        <Footer />
       </body>
     </html>
   );
