@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 const NAV_ITEMS = [
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("#home");
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     let rafId: number;
@@ -59,6 +61,10 @@ export default function Navbar() {
     }
     setActiveSection(path);
   };
+
+  if (pathname === "/resume") {
+    return null;
+  }
 
   return (
     <header className="fixed top-0 z-50 w-full flex justify-center pt-4 px-4">

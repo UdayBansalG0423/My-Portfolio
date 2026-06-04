@@ -2,6 +2,7 @@
 
 import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 
 const SOCIAL_LINKS = [
@@ -15,6 +16,7 @@ const WORDS = ["amazing", "creative", "impactful", "intelligent"];
 export default function Footer() {
   const [time, setTime] = useState<string>("");
   const [wordIndex, setWordIndex] = useState(0);
+  const pathname = usePathname();
 
   useEffect(() => {
     // Word cycler
@@ -42,6 +44,10 @@ export default function Footer() {
       clearInterval(timeInterval);
     };
   }, []);
+
+  if (pathname === "/resume") {
+    return null;
+  }
 
   return (
     <footer className="w-full bg-black border-t border-white/5 py-10 mt-16 relative z-10">
