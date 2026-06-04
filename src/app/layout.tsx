@@ -45,6 +45,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={`${inter.variable} ${spaceMono.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
     >
       <body className="min-h-full flex flex-col bg-bg text-text selection:bg-white/20 selection:text-white">
         <GlobalEffects />

@@ -105,8 +105,10 @@ export default function HeroSection() {
               src="/Uday-photo.jpeg"
               alt="Uday Bansal"
               fill
+              sizes="250px"
               className="object-cover"
-              priority
+              priority={true}
+              loading="eager"
             />
           </motion.div>
         </div>
