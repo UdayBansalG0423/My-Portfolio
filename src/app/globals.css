@@ -30,6 +30,12 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 :root {
   background-color: #000000;
   color: #ededed;
@@ -48,23 +54,46 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Minimalist scrollbars */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Hide all scrollbars globally */
+*::-webkit-scrollbar {
+  display: none !important;
 }
 
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
+* {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
-::-webkit-scrollbar-thumb {
-  background: #262626;
-  border-radius: 4px;
+/* Custom Scrollbar for Modal and specific containers */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #404040;
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.custom-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+}
+
+/* Hide scrollbar entirely */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+}
+.no-scrollbar {
+  -ms-overflow-style: none !important;
+  scrollbar-width: none !important;
 }
 
 /* Subtle Grid Overlay — opacity-only animation (GPU composited) */

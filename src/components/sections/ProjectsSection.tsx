@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import Image from "next/image";
 import {
   FileText,
@@ -211,6 +211,148 @@ function ProjectCardItem({ project, onClick }: { project: Project, onClick: () =
   );
 }
 
+const modalVariants = {
+  hidden: { opacity: 0, scale: 0.95, y: 20 },
+  visible: { 
+    opacity: 1, 
+    scale: 1, 
+    y: 0,
+    transition: { type: "spring", damping: 25, stiffness: 300, staggerChildren: 0.1, delayChildren: 0.1 }
+  },
+  exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.2 } }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 25, stiffness: 400 } }
+};
+
+function ProjectModal({ project, onClose }: { project: Project; onClose: () => void }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ container: scrollRef });
+
+  useEffect(() => {
+    // Lock body scroll when modal opens
+    const originalStyle = window.getComputedStyle(document.body).overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = originalStyle;
+    };
+  }, []);
+
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+      />
+
+      <motion.div
+        variants={modalVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        className="relative w-full max-w-2xl bg-[#0a0a0a]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-[0_0_50px_rgba(0,0,0,0.8)] flex flex-col max-h-[90vh] z-10 overflow-hidden"
+      >
+        {/* Creative Animated Scroll Progress Bar */}
+        <motion.div 
+          className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-500 via-blue-500 to-purple-500 origin-left z-50"
+          style={{ scaleX: scrollYProgress }}
+        />
+
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 p-2 text-muted hover:text-white rounded-full hover:bg-white/10 transition-colors z-20"
+        >
+          <X className="h-5 w-5" />
+        </button>
+
+        {/* Scrollable Content Area - Default scrollbar hidden via 'no-scrollbar' */}
+        <div ref={scrollRef} className="p-6 md:p-10 overflow-y-auto no-scrollbar w-full h-full">
+          <motion.div variants={itemVariants} className="mb-8 mt-2">
+            <span className="font-sans text-[11px] font-bold text-muted uppercase tracking-widest block mb-2">
+              {project.tag}
+            </span>
+            <h3 className="font-sans text-3xl font-bold text-white pr-8 bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400">
+              {project.title}
+            </h3>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className={`p-5 rounded-xl border border-white/5 mb-8 ${project.bgClass} relative overflow-hidden`}
+          >
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-[100%] animate-[shimmer_2s_infinite]" />
+            <p className={`font-sans text-sm font-semibold ${project.colorClass} relative z-10 flex items-center gap-2`}>
+              ✨ Highlight: {project.highlight}
+            </p>
+          </motion.div>
+
+          <div className="space-y-6 mb-10">
+            <motion.div variants={itemVariants}>
+              <h4 className="font-sans text-sm font-bold text-white mb-2">Overview</h4>
+              <p className="font-sans text-sm text-muted leading-relaxed">
+                {project.description}
+              </p>
+            </motion.div>
+
+            <motion.div variants={itemVariants}>
+              <h4 className="font-sans text-sm font-bold text-white mb-3">Key Features</h4>
+              <ul className="space-y-3">
+                {project.details.map((bullet, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm text-muted group">
+                    <div className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0 ${project.bgClass.replace('/10', '')} bg-opacity-100 transition-transform duration-300 group-hover:scale-150`} />
+                    <span className="leading-relaxed transition-colors duration-300 group-hover:text-white">{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          </div>
+
+          <motion.div variants={itemVariants} className="mb-10">
+            <h4 className="font-sans text-sm font-bold text-white mb-3">Technologies</h4>
+            <div className="flex flex-wrap gap-2">
+              {project.tech.map((t, idx) => (
+                <span
+                  key={idx}
+                  className="font-sans text-[11px] font-medium bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-muted transition-colors hover:bg-white/10 hover:text-white cursor-default"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10 mt-auto">
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-3 font-sans font-semibold text-sm text-white transition-all hover:bg-white/10"
+            >
+              <Github className="h-4 w-4" />
+              View Source
+            </a>
+
+            <a
+              href={project.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white text-black px-4 py-3 font-sans font-semibold text-sm transition-all hover:bg-gray-200"
+            >
+              Live Demo
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </motion.div>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<CategoryFilter>("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
@@ -225,6 +367,26 @@ export default function ProjectsSection() {
     if (filter === "featured") return p.isFeatured;
     return p.category === filter;
   });
+
+  // Memoize the grid so opening the modal doesn't trigger layout recalculations
+  const projectsGrid = useMemo(() => (
+    <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <AnimatePresence mode="popLayout">
+        {filteredProjects.map((project) => (
+          <motion.div
+            layout
+            key={project.id}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.4 }}
+          >
+            <ProjectCardItem project={project} onClick={() => setSelectedProject(project)} />
+          </motion.div>
+        ))}
+      </AnimatePresence>
+    </motion.div>
+  ), [filteredProjects]);
 
   return (
     <section id="projects" className="mx-auto max-w-7xl px-4 py-12 md:py-20 sm:px-6 lg:px-8">
@@ -272,125 +434,13 @@ export default function ProjectsSection() {
       </motion.div>
 
       {/* Projects Grid */}
-      <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => (
-            <motion.div
-              layout
-              key={project.id}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.4 }}
-            >
-              <ProjectCardItem project={project} onClick={() => setSelectedProject(project)} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
-      </motion.div>
+      {projectsGrid}
 
       {/* Project Expansion Modal */}
       {mounted && createPortal(
         <AnimatePresence>
           {selectedProject && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                onClick={() => setSelectedProject(null)}
-                className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-              />
-
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: 10 }}
-                animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl p-5 md:p-10 overflow-y-auto max-h-[90vh] z-10"
-              >
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="absolute top-4 right-4 p-2 text-muted hover:text-white rounded-full hover:bg-white/10 transition-colors"
-                >
-                  <X className="h-5 w-5" />
-                </button>
-
-                <div className="mb-8 mt-2">
-                  <span className="font-sans text-[11px] font-bold text-muted uppercase tracking-widest block mb-2">
-                    {selectedProject.tag}
-                  </span>
-                  <h3 className="font-sans text-3xl font-bold text-white pr-8">
-                    {selectedProject.title}
-                  </h3>
-                </div>
-
-                <div
-                  className={`p-4 rounded-xl border border-white/5 mb-8 ${selectedProject.bgClass}`}
-                >
-                  <p className={`font-sans text-sm font-semibold ${selectedProject.colorClass}`}>
-                    Highlight: {selectedProject.highlight}
-                  </p>
-                </div>
-
-                <div className="space-y-6 mb-10">
-                  <div>
-                    <h4 className="font-sans text-sm font-bold text-white mb-2">Overview</h4>
-                    <p className="font-sans text-sm text-muted leading-relaxed">
-                      {selectedProject.description}
-                    </p>
-                  </div>
-
-                  <div>
-                    <h4 className="font-sans text-sm font-bold text-white mb-3">Key Features</h4>
-                    <ul className="space-y-3">
-                      {selectedProject.details.map((bullet, idx) => (
-                        <li key={idx} className="flex items-start gap-3 text-sm text-muted">
-                          <div className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0 ${selectedProject.bgClass.replace('/10', '')} bg-opacity-100`} />
-                          <span className="leading-relaxed">{bullet}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-
-                <div className="mb-10">
-                  <h4 className="font-sans text-sm font-bold text-white mb-3">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedProject.tech.map((t, idx) => (
-                      <span
-                        key={idx}
-                        className="font-sans text-[11px] font-medium bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-muted"
-                      >
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
-                  <a
-                    href={selectedProject.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-3 font-sans font-semibold text-sm text-white transition-all hover:bg-white/10"
-                  >
-                    <Github className="h-4 w-4" />
-                    View Source
-                  </a>
-
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white text-black px-4 py-3 font-sans font-semibold text-sm transition-all hover:bg-gray-200"
-                  >
-                    Live Demo
-                    <ExternalLink className="h-4 w-4" />
-                  </a>
-                </div>
-              </motion.div>
-            </div>
+            <ProjectModal project={selectedProject} onClose={() => setSelectedProject(null)} />
           )}
         </AnimatePresence>,
         document.body
