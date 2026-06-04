@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import GlobalEffects from "@/components/GlobalEffects";
 import PageWrapper from "@/components/PageWrapper";
+import InteractiveTerminal from "@/components/InteractiveTerminal";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -86,6 +87,7 @@ export default function RootLayout({
           <PageWrapper>{children}</PageWrapper>
         </main>
 
+        <InteractiveTerminal />
         <Footer />
       </body>
     </html>
