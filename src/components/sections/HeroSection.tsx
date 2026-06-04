@@ -1,11 +1,35 @@
 "use client";
 
 import Link from "next/link";
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useMotionValue, useSpring } from "framer-motion";
 import Typewriter from "@/components/Typewriter";
 import { ArrowRight, Database, Award, Briefcase, GraduationCap } from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 export default function HeroSection() {
+  const [isHovered, setIsHovered] = useState(false);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springX = useSpring(mouseX, { stiffness: 100, damping: 15 });
+  const springY = useSpring(mouseY, { stiffness: 100, damping: 15 });
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+    };
+
+    if (isHovered) {
+      window.addEventListener("mousemove", handleMouseMove);
+    }
+
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [isHovered, mouseX, mouseY]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,12 +70,46 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Big display name */}
-        <motion.h1
-          variants={itemVariants}
-          className="font-sans text-5xl md:text-8xl font-bold tracking-tight text-white mb-2 leading-tight"
+        <div
+          className="relative inline-block cursor-default"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         >
-          Uday Bansal
-        </motion.h1>
+          <motion.h1
+            variants={itemVariants}
+            className="font-sans text-5xl md:text-8xl font-bold tracking-tight text-white mb-2 leading-tight relative z-10"
+          >
+            Uday Bansal
+          </motion.h1>
+
+          {/* Floating Profile Image (Hover Effect) */}
+          <motion.div
+            className="pointer-events-none fixed left-0 top-0 z-[100] overflow-hidden rounded-2xl border-2 border-white/10 shadow-2xl"
+            style={{
+              width: 250,
+              height: 350,
+              x: springX,
+              y: springY,
+              translateX: "-50%",
+              translateY: "-50%",
+              opacity: isHovered ? 1 : 0,
+              scale: isHovered ? 1 : 0.5,
+              rotate: isHovered ? -3 : 0,
+            }}
+            transition={{
+              opacity: { duration: 0.2 },
+              scale: { duration: 0.4, type: "spring" },
+            }}
+          >
+            <Image
+              src="/Uday-photo.jpeg"
+              alt="Uday Bansal"
+              fill
+              className="object-cover"
+              priority
+            />
+          </motion.div>
+        </div>
 
         {/* Headline */}
         <motion.p
