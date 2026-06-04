@@ -18,6 +18,7 @@ const spaceMono = Space_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://udayportfolio-nu.vercel.app"),
   title: "Uday Bansal | AI/ML Engineer & GenAI Developer",
   description:
     "Portfolio of Uday Bansal, a 4th-year B.Tech CSE (AI/ML) student, AI/ML Engineer, Generative AI Developer, and Backend Learner building production-ready intelligent systems.",
@@ -34,6 +35,28 @@ export const metadata: Metadata = {
     "Portfolio",
   ],
   authors: [{ name: "Uday Bansal" }],
+  openGraph: {
+    title: "Uday Bansal | AI/ML Engineer & GenAI Developer",
+    description: "Portfolio of Uday Bansal, a 4th-year B.Tech CSE (AI/ML) student, AI/ML Engineer, and Generative AI Developer building production-ready intelligent systems.",
+    url: "https://udayportfolio-nu.vercel.app",
+    siteName: "Uday Bansal Portfolio",
+    images: [
+      {
+        url: "/icon.svg",
+        width: 512,
+        height: 512,
+        alt: "Uday Bansal Logo",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Uday Bansal | AI/ML Engineer & GenAI Developer",
+    description: "Portfolio of Uday Bansal, AI/ML Engineer & Generative AI Developer.",
+    images: ["/icon.svg"],
+  },
 };
 
 export default function RootLayout({

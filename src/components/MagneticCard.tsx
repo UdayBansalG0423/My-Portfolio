@@ -56,7 +56,7 @@ export default function MagneticCard({ children, className = "" }: MagneticCardP
       }}
       className={className}
     >
-      <div style={{ transform: "translateZ(30px)" }} className="h-full">
+      <div style={{ transform: "translateZ(30px)" }} className="relative h-full w-full">
         {children}
       </div>
     </motion.div>
