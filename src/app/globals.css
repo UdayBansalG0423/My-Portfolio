@@ -110,10 +110,34 @@ body {
   transform: translateY(-2px);
 }
 
-/* Smooth Gradient Text */
 .gradient-text {
   background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* CSS-only project card glows (replaces JS mouse-tracking spotlight) */
+.card-glow-overlay {
+  background: radial-gradient(600px circle at 50% 30%, rgba(255,255,255,0.03), transparent 40%);
+}
+
+.hover-glow-blue:hover .card-glow-overlay,
+.hover-glow-blue .card-glow-overlay {
+  background: radial-gradient(600px circle at 50% 30%, rgba(59, 130, 246, 0.08), transparent 40%);
+}
+
+.hover-glow-emerald:hover .card-glow-overlay,
+.hover-glow-emerald .card-glow-overlay {
+  background: radial-gradient(600px circle at 50% 30%, rgba(16, 185, 129, 0.08), transparent 40%);
+}
+
+.hover-glow-purple:hover .card-glow-overlay,
+.hover-glow-purple .card-glow-overlay {
+  background: radial-gradient(600px circle at 50% 30%, rgba(168, 85, 247, 0.08), transparent 40%);
+}
+
+.hover-glow-white:hover .card-glow-overlay,
+.hover-glow-white .card-glow-overlay {
+  background: radial-gradient(600px circle at 50% 30%, rgba(255, 255, 255, 0.04), transparent 40%);
 }

@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Sparkles, User, Hourglass } from "lucide-react";
-import MagneticCard from "@/components/MagneticCard";
 
 interface TimelineItem {
   year: string;
@@ -96,9 +95,8 @@ export default function AboutSection() {
         className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start"
       >
         {/* Left Column: Biography Details */}
-        <motion.div variants={itemVariants} className="lg:col-span-5 space-y-8" style={{ perspective: 1000 }}>
-          <MagneticCard>
-            <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300 h-full">
+        <motion.div variants={itemVariants} className="lg:col-span-5 space-y-8">
+          <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300 h-full">
               <h3 className="font-sans text-2xl font-semibold text-white mb-4">Uday Bansal</h3>
               <p className="text-sm md:text-base text-muted font-sans leading-relaxed mb-6">
                 I am a fourth-year B.Tech Computer Science student specializing in Artificial Intelligence and Machine Learning. 
@@ -110,8 +108,7 @@ export default function AboutSection() {
                 working with Large Language Models, and creating AI-powered applications. I am passionate about understanding not only how AI 
                 models work but also how to deploy, scale, and integrate them into production systems.
               </p>
-            </div>
-          </MagneticCard>
+          </div>
 
           {/* Key Metrics Cards */}
           <div className="grid grid-cols-2 gap-4">

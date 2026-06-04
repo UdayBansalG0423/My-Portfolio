@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence, useMotionValue, useMotionTemplate } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import {
   FileText,
   MessageSquare,
@@ -12,7 +13,6 @@ import {
   LucideIcon,
 } from "lucide-react";
 import { Github } from "@/components/Icons";
-import MagneticCard from "@/components/MagneticCard";
 
 interface Project {
   id: number;
@@ -30,7 +30,7 @@ interface Project {
   details: string[];
   github: string;
   demo: string;
-  image: string;
+  image: string; // should be .webp path
 }
 
 const PROJECTS_DATA: Project[] = [
@@ -58,7 +58,7 @@ const PROJECTS_DATA: Project[] = [
     ],
     github: "https://github.com/UdayBansalG0423",
     demo: "https://github.com/UdayBansalG0423",
-    image: "/projects/neuraldoc.png",
+    image: "/projects/neuraldoc.webp",
   },
   {
     id: 2,
@@ -83,7 +83,7 @@ const PROJECTS_DATA: Project[] = [
     ],
     github: "https://github.com/UdayBansalG0423",
     demo: "https://github.com/UdayBansalG0423",
-    image: "/projects/chatbot.png",
+    image: "/projects/chatbot.webp",
   },
   {
     id: 3,
@@ -108,69 +108,39 @@ const PROJECTS_DATA: Project[] = [
     ],
     github: "https://github.com/UdayBansalG0423",
     demo: "https://github.com/UdayBansalG0423",
-    image: "/projects/analytics.png",
+    image: "/projects/analytics.webp",
   },
 ];
 
 type CategoryFilter = "all" | "featured" | "ai-ml" | "web";
 
 function ProjectCardItem({ project, onClick }: { project: Project, onClick: () => void }) {
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
   const IconComponent = project.icon;
 
-  function handleMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
-    const { left, top } = currentTarget.getBoundingClientRect();
-    mouseX.set(clientX - left);
-    mouseY.set(clientY - top);
-  }
-
-  // Determine glow color based on the project's accent color
-  const glowColor = 
-    project.colorClass.includes("blue") ? "rgba(59, 130, 246, 0.15)" :
-    project.colorClass.includes("emerald") ? "rgba(16, 185, 129, 0.15)" :
-    project.colorClass.includes("purple") ? "rgba(168, 85, 247, 0.15)" : "rgba(255, 255, 255, 0.1)";
+  // Determine CSS glow class based on project accent color
+  const glowClass =
+    project.colorClass.includes("blue") ? "hover-glow-blue" :
+    project.colorClass.includes("emerald") ? "hover-glow-emerald" :
+    project.colorClass.includes("purple") ? "hover-glow-purple" : "hover-glow-white";
 
   return (
     <div
       onClick={onClick}
-      onMouseMove={handleMouseMove}
-      className="group relative h-full w-full cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-[#0a0a0a]/50 p-6 transition-all duration-500 hover:border-white/20"
+      className={`group relative h-full w-full cursor-pointer overflow-hidden rounded-2xl border border-white/5 bg-[#0a0a0a]/50 p-6 transition-all duration-500 hover:border-white/20 ${glowClass}`}
     >
-      {/* Soft general white glow */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              600px circle at ${mouseX}px ${mouseY}px,
-              rgba(255,255,255,0.03),
-              transparent 40%
-            )
-          `,
-        }}
-      />
-      {/* Accent color specific glow */}
-      <motion.div
-        className="pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{
-          background: useMotionTemplate`
-            radial-gradient(
-              400px circle at ${mouseX}px ${mouseY}px,
-              ${glowColor},
-              transparent 40%
-            )
-          `,
-        }}
-      />
+      {/* CSS-only hover glow overlay — no JS event handlers */}
+      <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
 
       <div className="absolute inset-x-0 top-0 h-48 overflow-hidden rounded-t-2xl border-b border-white/10 opacity-80 group-hover:opacity-100 transition-opacity duration-500">
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent z-10" />
         {project.image && (
-          <img 
-            src={project.image} 
-            alt={project.title} 
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+          <Image
+            src={project.image}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            className="object-cover transition-transform duration-700 group-hover:scale-110"
+            loading="lazy"
           />
         )}
       </div>
@@ -295,24 +265,18 @@ export default function ProjectsSection() {
       {/* Projects Grid */}
       <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <AnimatePresence mode="popLayout">
-          {filteredProjects.map((project) => {
-            const IconComponent = project.icon;
-            return (
-              <motion.div
-                layout
-                key={project.id}
-                initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
-                transition={{ duration: 0.4 }}
-                style={{ perspective: 1000 }}
-              >
-                <MagneticCard className="h-full">
-                  <ProjectCardItem project={project} onClick={() => setSelectedProject(project)} />
-                </MagneticCard>
-              </motion.div>
-            );
-          })}
+          {filteredProjects.map((project) => (
+            <motion.div
+              layout
+              key={project.id}
+              initial={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
+              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, scale: 0.95, filter: "blur(4px)" }}
+              transition={{ duration: 0.4 }}
+            >
+              <ProjectCardItem project={project} onClick={() => setSelectedProject(project)} />
+            </motion.div>
+          ))}
         </AnimatePresence>
       </motion.div>
 
@@ -325,7 +289,7 @@ export default function ProjectsSection() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/60 backdrop-blur-xl"
+              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
             />
 
             <motion.div

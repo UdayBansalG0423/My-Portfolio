@@ -60,8 +60,8 @@ export default function Navbar() {
       <div
         className={`mx-auto max-w-5xl w-full flex items-center justify-between rounded-full transition-all duration-500 ${
           scrolled
-            ? "bg-black/75 backdrop-blur-2xl border border-white/15 py-3 px-6 shadow-2xl shadow-black/60"
-            : "bg-black/30 backdrop-blur-md border border-white/8 py-3 px-6 shadow-lg shadow-black/20"
+            ? "bg-black/85 backdrop-blur-md border border-white/15 py-3 px-6 shadow-2xl shadow-black/60"
+            : "bg-black/40 backdrop-blur-sm border border-white/8 py-3 px-6 shadow-lg shadow-black/20"
         }`}
       >
         {/* Logo / Name */}
@@ -137,7 +137,7 @@ export default function Navbar() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: -20, scale: 0.95 }}
           transition={{ duration: 0.2 }}
-          className="absolute top-24 left-4 right-4 md:hidden border border-white/10 rounded-2xl bg-black/90 backdrop-blur-2xl p-4 shadow-2xl"
+          className="absolute top-24 left-4 right-4 md:hidden border border-white/10 rounded-2xl bg-black/95 backdrop-blur-md p-4 shadow-2xl"
         >
           <div className="flex flex-col space-y-1">
             {NAV_ITEMS.map((item) => {
