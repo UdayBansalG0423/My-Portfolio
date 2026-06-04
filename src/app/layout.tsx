@@ -50,8 +50,8 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col bg-bg text-text selection:bg-white/20 selection:text-white">
         <GlobalEffects />
         {/* Subtle Background Glows */}
-        <div className="fixed inset-0 radial-glow-hero -z-20 pointer-events-none" />
-        <div className="fixed inset-0 grid-overlay -z-20 pointer-events-none opacity-50" />
+        <div className="fixed inset-0 radial-glow-hero z-0 pointer-events-none" />
+        <div className="fixed inset-0 grid-overlay z-0 pointer-events-none opacity-50" />
 
         {/* Header / Navbar */}
         <div className="relative z-20">
