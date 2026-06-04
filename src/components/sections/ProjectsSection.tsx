@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import {
@@ -213,6 +214,11 @@ function ProjectCardItem({ project, onClick }: { project: Project, onClick: () =
 export default function ProjectsSection() {
   const [filter, setFilter] = useState<CategoryFilter>("all");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const filteredProjects = PROJECTS_DATA.filter((p) => {
     if (filter === "all") return true;
@@ -284,108 +290,111 @@ export default function ProjectsSection() {
       </motion.div>
 
       {/* Project Expansion Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setSelectedProject(null)}
-              className="absolute inset-0 bg-black/70 backdrop-blur-sm"
-            />
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl p-5 md:p-10 overflow-y-auto max-h-[90vh] z-10"
-            >
-              <button
+      {mounted && createPortal(
+        <AnimatePresence>
+          {selectedProject && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 onClick={() => setSelectedProject(null)}
-                className="absolute top-4 right-4 p-2 text-muted hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                className="absolute inset-0 bg-black/70 backdrop-blur-sm"
+              />
+
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                className="relative w-full max-w-2xl bg-[#0a0a0a] border border-white/10 rounded-2xl shadow-2xl p-5 md:p-10 overflow-y-auto max-h-[90vh] z-10"
               >
-                <X className="h-5 w-5" />
-              </button>
+                <button
+                  onClick={() => setSelectedProject(null)}
+                  className="absolute top-4 right-4 p-2 text-muted hover:text-white rounded-full hover:bg-white/10 transition-colors"
+                >
+                  <X className="h-5 w-5" />
+                </button>
 
-              <div className="mb-8 mt-2">
-                <span className="font-sans text-[11px] font-bold text-muted uppercase tracking-widest block mb-2">
-                  {selectedProject.tag}
-                </span>
-                <h3 className="font-sans text-3xl font-bold text-white pr-8">
-                  {selectedProject.title}
-                </h3>
-              </div>
+                <div className="mb-8 mt-2">
+                  <span className="font-sans text-[11px] font-bold text-muted uppercase tracking-widest block mb-2">
+                    {selectedProject.tag}
+                  </span>
+                  <h3 className="font-sans text-3xl font-bold text-white pr-8">
+                    {selectedProject.title}
+                  </h3>
+                </div>
 
-              <div
-                className={`p-4 rounded-xl border border-white/5 mb-8 ${selectedProject.bgClass}`}
-              >
-                <p className={`font-sans text-sm font-semibold ${selectedProject.colorClass}`}>
-                  Highlight: {selectedProject.highlight}
-                </p>
-              </div>
-
-              <div className="space-y-6 mb-10">
-                <div>
-                  <h4 className="font-sans text-sm font-bold text-white mb-2">Overview</h4>
-                  <p className="font-sans text-sm text-muted leading-relaxed">
-                    {selectedProject.description}
+                <div
+                  className={`p-4 rounded-xl border border-white/5 mb-8 ${selectedProject.bgClass}`}
+                >
+                  <p className={`font-sans text-sm font-semibold ${selectedProject.colorClass}`}>
+                    Highlight: {selectedProject.highlight}
                   </p>
                 </div>
 
-                <div>
-                  <h4 className="font-sans text-sm font-bold text-white mb-3">Key Features</h4>
-                  <ul className="space-y-3">
-                    {selectedProject.details.map((bullet, idx) => (
-                      <li key={idx} className="flex items-start gap-3 text-sm text-muted">
-                        <div className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0 ${selectedProject.bgClass.replace('/10', '')} bg-opacity-100`} />
-                        <span className="leading-relaxed">{bullet}</span>
-                      </li>
+                <div className="space-y-6 mb-10">
+                  <div>
+                    <h4 className="font-sans text-sm font-bold text-white mb-2">Overview</h4>
+                    <p className="font-sans text-sm text-muted leading-relaxed">
+                      {selectedProject.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    <h4 className="font-sans text-sm font-bold text-white mb-3">Key Features</h4>
+                    <ul className="space-y-3">
+                      {selectedProject.details.map((bullet, idx) => (
+                        <li key={idx} className="flex items-start gap-3 text-sm text-muted">
+                          <div className={`mt-1.5 h-1.5 w-1.5 rounded-full flex-shrink-0 ${selectedProject.bgClass.replace('/10', '')} bg-opacity-100`} />
+                          <span className="leading-relaxed">{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+
+                <div className="mb-10">
+                  <h4 className="font-sans text-sm font-bold text-white mb-3">Technologies</h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tech.map((t, idx) => (
+                      <span
+                        key={idx}
+                        className="font-sans text-[11px] font-medium bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-muted"
+                      >
+                        {t}
+                      </span>
                     ))}
-                  </ul>
+                  </div>
                 </div>
-              </div>
 
-              <div className="mb-10">
-                <h4 className="font-sans text-sm font-bold text-white mb-3">Technologies</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tech.map((t, idx) => (
-                    <span
-                      key={idx}
-                      className="font-sans text-[11px] font-medium bg-white/5 border border-white/10 px-3 py-1.5 rounded-full text-muted"
-                    >
-                      {t}
-                    </span>
-                  ))}
+                <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
+                  <a
+                    href={selectedProject.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-3 font-sans font-semibold text-sm text-white transition-all hover:bg-white/10"
+                  >
+                    <Github className="h-4 w-4" />
+                    View Source
+                  </a>
+
+                  <a
+                    href={selectedProject.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white text-black px-4 py-3 font-sans font-semibold text-sm transition-all hover:bg-gray-200"
+                  >
+                    Live Demo
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
                 </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row gap-4 pt-6 border-t border-white/10">
-                <a
-                  href={selectedProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white/5 border border-white/10 px-4 py-3 font-sans font-semibold text-sm text-white transition-all hover:bg-white/10"
-                >
-                  <Github className="h-4 w-4" />
-                  View Source
-                </a>
-
-                <a
-                  href={selectedProject.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex-1 flex items-center justify-center gap-2 rounded-xl bg-white text-black px-4 py-3 font-sans font-semibold text-sm transition-all hover:bg-gray-200"
-                >
-                  Live Demo
-                  <ExternalLink className="h-4 w-4" />
-                </a>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
