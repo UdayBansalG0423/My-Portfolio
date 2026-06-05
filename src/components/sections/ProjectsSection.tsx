@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
-import { motion, AnimatePresence, useScroll } from "framer-motion";
+import { motion, AnimatePresence, useScroll, Variants } from "framer-motion";
 import Image from "next/image";
 import {
   FileText,
@@ -211,7 +211,7 @@ function ProjectCardItem({ project, onClick }: { project: Project, onClick: () =
   );
 }
 
-const modalVariants = {
+const modalVariants: Variants = {
   hidden: { opacity: 0, scale: 0.95, y: 20 },
   visible: { 
     opacity: 1, 
@@ -222,7 +222,7 @@ const modalVariants = {
   exit: { opacity: 0, scale: 0.95, y: 20, transition: { duration: 0.2 } }
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
   visible: { opacity: 1, y: 0, transition: { type: "spring", damping: 25, stiffness: 400 } }
 };
