@@ -102,7 +102,9 @@ export default function AboutSection() {
       >
         {/* Left Column: Biography Details */}
         <motion.div variants={itemVariants} className="lg:col-span-5 space-y-8">
-          <div className="glass-panel p-6 md:p-8 rounded-2xl relative overflow-hidden group hover:border-white/20 transition-all duration-300 h-full">
+          <div className="glass-panel p-6 md:p-8 rounded-2xl relative group hover-glow-emerald overflow-hidden hover:border-white/20 transition-all duration-300 h-full">
+            <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+            <div className="relative z-10">
               <h3 className="font-sans text-2xl font-semibold text-white mb-4">Uday Bansal</h3>
               <p className="text-sm md:text-base text-muted font-sans leading-relaxed mb-6">
                 I am a fourth-year B.Tech Computer Science student specializing in Artificial Intelligence and Machine Learning. 
@@ -114,6 +116,7 @@ export default function AboutSection() {
                 working with Large Language Models, and creating AI-powered applications. I am passionate about understanding not only how AI 
                 models work but also how to deploy, scale, and integrate them into production systems.
               </p>
+            </div>
           </div>
 
           {/* Key Metrics Cards */}
@@ -198,45 +201,48 @@ export default function AboutSection() {
                   </span>
 
                   {/* Event Details Card */}
-                  <div className="glass-panel p-5 md:p-6 rounded-2xl transition-all duration-300 hover:border-white/20 hover:bg-white/5">
-                    <h4 className="font-sans text-lg font-semibold text-white mb-1">
-                      {event.title}
-                    </h4>
-                    <h5 className="font-sans text-sm font-medium text-muted/85 mb-4">
-                      {event.subtitle}
-                    </h5>
-                    
-                    {event.type === "academic" ? (
-                      <div className="space-y-4">
-                        <p className="font-sans text-sm text-muted leading-relaxed">
-                          {event.description.split("Relevant Coursework:")[0]}
-                        </p>
-                        {event.description.includes("Relevant Coursework:") && (
-                          <div>
-                            <span className="font-sans text-xs font-bold text-white uppercase tracking-wider block mb-2">
-                              Relevant Coursework
-                            </span>
-                            <div className="flex flex-wrap gap-1.5">
-                              {event.description
-                                .split("Relevant Coursework:")[1]
-                                .split(",")
-                                .map((course, idx) => (
-                                  <span
-                                    key={idx}
-                                    className="font-sans text-[10px] font-semibold bg-white/5 border border-white/10 px-2 py-0.5 rounded text-muted hover:text-white hover:border-white/20 transition-all duration-300"
-                                  >
-                                    {course.trim()}
-                                  </span>
-                                ))}
+                  <div className="glass-panel p-5 md:p-6 rounded-2xl relative group hover-glow-emerald overflow-hidden transition-all duration-300 hover:border-white/20 hover:bg-white/5">
+                    <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                    <div className="relative z-10">
+                      <h4 className="font-sans text-lg font-semibold text-white mb-1">
+                        {event.title}
+                      </h4>
+                      <h5 className="font-sans text-sm font-medium text-muted/85 mb-4">
+                        {event.subtitle}
+                      </h5>
+                      
+                      {event.type === "academic" ? (
+                        <div className="space-y-4">
+                          <p className="font-sans text-sm text-muted leading-relaxed">
+                            {event.description.split("Relevant Coursework:")[0]}
+                          </p>
+                          {event.description.includes("Relevant Coursework:") && (
+                            <div>
+                              <span className="font-sans text-xs font-bold text-white uppercase tracking-wider block mb-2">
+                                Relevant Coursework
+                              </span>
+                              <div className="flex flex-wrap gap-1.5">
+                                {event.description
+                                  .split("Relevant Coursework:")[1]
+                                  .split(",")
+                                  .map((course, idx) => (
+                                    <span
+                                      key={idx}
+                                      className="font-sans text-[10px] font-semibold bg-white/5 border border-white/10 px-2 py-0.5 rounded text-muted hover:text-white hover:border-white/20 transition-all duration-300"
+                                    >
+                                      {course.trim()}
+                                    </span>
+                                  ))}
+                              </div>
                             </div>
-                          </div>
-                        )}
-                      </div>
-                    ) : (
-                      <p className="font-sans text-sm text-muted leading-relaxed">
-                        {event.description}
-                      </p>
-                    )}
+                          )}
+                        </div>
+                      ) : (
+                        <p className="font-sans text-sm text-muted leading-relaxed">
+                          {event.description}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 </motion.div>
               );
@@ -254,53 +260,59 @@ export default function AboutSection() {
         className="mt-16 pt-16 border-t border-white/5 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12"
       >
         {/* What Makes Me Different */}
-        <div className="glass-panel p-6 md:p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
-          <h3 className="font-sans text-lg md:text-xl font-bold text-white mb-6 flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-amber-400" /> What Makes Me Different
-          </h3>
-          <ul className="space-y-4">
-            {[
-              "Strong foundation in Machine Learning and model pipeline optimization",
-              "Practical experience with Generative AI applications and custom RAG structures",
-              "Actively learning Backend Engineering to deploy production-ready AI models",
-              "Consistent focus on core Data Structures, Algorithms, and System Design",
-              "Passion for engineering end-to-end intelligent systems from inception to launch",
-              "Continuous learner focused on keeping pace with modern AI and developer stacks"
-            ].map((point, idx) => (
-              <li key={idx} className="flex items-start gap-3 text-xs md:text-sm text-muted">
-                <span className="text-emerald-400 font-bold">✓</span>
-                <span className="leading-relaxed">{point}</span>
-              </li>
-            ))}
-          </ul>
+        <div className="glass-panel p-6 md:p-8 rounded-2xl relative group hover-glow-amber overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300">
+          <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="relative z-10">
+            <h3 className="font-sans text-lg md:text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <Sparkles className="h-5 w-5 text-amber-400" /> What Makes Me Different
+            </h3>
+            <ul className="space-y-4">
+              {[
+                "Strong foundation in Machine Learning and model pipeline optimization",
+                "Practical experience with Generative AI applications and custom RAG structures",
+                "Actively learning Backend Engineering to deploy production-ready AI models",
+                "Consistent focus on core Data Structures, Algorithms, and System Design",
+                "Passion for engineering end-to-end intelligent systems from inception to launch",
+                "Continuous learner focused on keeping pace with modern AI and developer stacks"
+              ].map((point, idx) => (
+                <li key={idx} className="flex items-start gap-3 text-xs md:text-sm text-muted">
+                  <span className="text-emerald-400 font-bold">✓</span>
+                  <span className="leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
 
         {/* Current Focus / Learning */}
-        <div className="glass-panel p-6 md:p-8 rounded-2xl border border-white/10 hover:border-white/20 transition-all duration-300">
-          <h3 className="font-sans text-lg md:text-xl font-bold text-white mb-6 flex items-center gap-2">
-            <Hourglass className="h-5 w-5 text-emerald-400" /> Current Focus & Learning
-          </h3>
-          <div className="grid grid-cols-2 gap-3">
-            {[
-              "Advanced Deep Learning",
-              "Production GenAI Systems",
-              "Scalable Backend Dev",
-              "Core System Design",
-              "Agentic AI Workflows",
-              "MLOps Pipelines",
-              "Scalable AI Architectures",
-              "Advanced Algorithms"
-            ].map((focus, idx) => (
-              <div
-                key={idx}
-                className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/15 transition-all duration-300"
-              >
-                <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                <span className="font-sans text-[11px] font-semibold text-gray-200">
-                  {focus}
-                </span>
-              </div>
-            ))}
+        <div className="glass-panel p-6 md:p-8 rounded-2xl relative group hover-glow-blue overflow-hidden border border-white/10 hover:border-white/20 transition-all duration-300">
+          <div className="card-glow-overlay pointer-events-none absolute -inset-px rounded-2xl opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+          <div className="relative z-10">
+            <h3 className="font-sans text-lg md:text-xl font-bold text-white mb-6 flex items-center gap-2">
+              <Hourglass className="h-5 w-5 text-emerald-400" /> Current Focus & Learning
+            </h3>
+            <div className="grid grid-cols-2 gap-3">
+              {[
+                "Advanced Deep Learning",
+                "Production GenAI Systems",
+                "Scalable Backend Dev",
+                "Core System Design",
+                "Agentic AI Workflows",
+                "MLOps Pipelines",
+                "Scalable AI Architectures",
+                "Advanced Algorithms"
+              ].map((focus, idx) => (
+                <div
+                  key={idx}
+                  className="flex items-center gap-2 px-3 py-2.5 rounded-xl bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/15 transition-all duration-300"
+                >
+                  <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                  <span className="font-sans text-[11px] font-semibold text-gray-200">
+                    {focus}
+                  </span>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </motion.div>

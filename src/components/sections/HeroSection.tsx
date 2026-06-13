@@ -139,11 +139,7 @@ export default function HeroSection() {
           variants={itemVariants}
           className="max-w-3xl text-sm md:text-base text-muted font-sans leading-relaxed mb-12 text-center"
         >
-          Hi, I&apos;m Uday Bansal, a Computer Science student specializing in Artificial Intelligence and Machine Learning. 
-          I build machine learning models, Generative AI applications, and intelligent systems that solve real-world problems. 
-          My interests include Machine Learning, Deep Learning, Large Language Models, Retrieval-Augmented Generation (RAG), 
-          Backend Development, and AI-powered products. Currently, I am focused on mastering production-grade AI systems, 
-          scalable backend architectures, and deploying end-to-end AI applications.
+          Hi, I&apos;m Uday Bansal, an AI/ML Computer Science student. I engineer machine learning models, Generative AI applications, and scalable backend architectures that solve real-world problems.
         </motion.p>
 
         {/* Call to Actions */}
